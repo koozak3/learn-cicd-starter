@@ -20,17 +20,3 @@ jobs:
 
       - name: "Build the app"
         run: ./scripts/buildprod.sh
-
-      - name: "Setup gcloud auth"
-        uses: "google-github-actions/auth@v2"
-        with:
-          workload_identity_provider: "projects/70794108153/locations/global/workloadIdentityPools/github/providers/my-repo"
-          service_account: "cloud-run-deployer@notely-514709.iam.gserviceaccount.com"
-
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v3"
-        with:
-          version: ">= 363.0.0"
-
-      - name: "Sends build to google cloud"
-        run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-514709/notely-ar-repo/notely:latest .
